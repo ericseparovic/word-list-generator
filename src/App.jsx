@@ -32,18 +32,25 @@ function App() {
 
 	return (
 		<div>
-			<h1>Word List Generator</h1>
-			<form action=''>
-				<textarea
-					name=''
-					id=''
-					cols='30'
-					rows='10'
-					onChange={(e) => setText(e.target.value)}
-					value={text}></textarea>
-				<button type='button' onClick={createFile}>
-					Create
-				</button>
+			<h1 className='text-4xl p-10 text-white font-bold'>
+				Word List Generator
+			</h1>
+			<form action='' className='mt-28'>
+				<div>
+					<textarea
+						className='w-full  max-w-md p-5  max-h-44'
+						name=''
+						id=''
+						onChange={(e) => setText(e.target.value)}
+						value={text}></textarea>
+				</div>
+				<div>
+					<button
+						className='text-white bg-sky-700 rounded px-4 py-2'
+						onClick={createFile}>
+						Create
+					</button>
+				</div>
 			</form>
 		</div>
 	);
