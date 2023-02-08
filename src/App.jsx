@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { saveAs } from "file-saver";
 
 function App() {
   const [text, setText] = useState("");
   const [words, setWords] = useState([]);
 
+  //Create array
   const convertToArray = () => {
-    //Create array
     const cleanedText = text.replace(/[^A-Za-z']/g, " ");
     const words = cleanedText.split(" ");
     const uniqueWords = [...new Set(words)];
@@ -19,9 +20,19 @@ function App() {
     setWords(allWords);
   };
 
-  function onChangeText(e) {
-    setText(e.target.value);
-  }
+  // It is responsible for creating the file
+  const createFile = () => {
+    let text = "";
+    words.forEach((word) => {
+      text += `${word} \n`;
+    });
+    const blob = new Blob([text], { type: "text/plain;carhset=utf-8" });
+    saveAs(blob, "words.txt");
+  };
+
+  useEffect(() => {
+    convertToArray();
+  }, [text]);
 
   return (
     <div>
@@ -32,10 +43,12 @@ function App() {
           id=""
           cols="30"
           rows="10"
-          onChange={onChangeText}
+          onChange={(e) => setText(e.target.value)}
           value={text}
         ></textarea>
-        <input type="button" value="Create" onClick={convertToArray} />
+        <button type="button" onClick={createFile}>
+          Create
+        </button>
       </form>
     </div>
   );
