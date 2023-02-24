@@ -19,8 +19,9 @@ function App() {
 	// It is responsible for creating the file
 	const createFile = () => {
 		let text = '';
+		console.log(words.length + 1);
 		words.forEach((word) => {
-			text += `${word} \n`;
+			text += `[sound:${word}.mp3] \n`;
 		});
 		const blob = new Blob([text], { type: 'text/plain;carhset=utf-8' });
 		saveAs(blob, 'words.txt');
@@ -32,7 +33,7 @@ function App() {
 
 	return (
 		<div>
-			<h1 className='text-4xl p-10 text-white font-bold'>
+			<h1 className='text-4xl p-10 text-white font-bold mt-6'>
 				Word List Generator
 			</h1>
 			<form action='' className='mt-28'>
